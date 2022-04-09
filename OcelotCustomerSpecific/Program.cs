@@ -12,21 +12,21 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddIdentityServerAuthentication(JwtBearerDefaults.AuthenticationScheme, (IdentityServerAuthenticationOptions x) =>
     {
-        string authority = "http://localhost:5001";
+      string authority = "http://localhost:5001";
 
-        x.Authority = authority;
-        x.RequireHttpsMetadata = authority.StartsWith("https");
-        //x.ApiName
+      x.Authority = authority;
+      x.RequireHttpsMetadata = authority.StartsWith("https");
+      //x.ApiName
 
-        x.JwtValidationClockSkew = TimeSpan.Zero;
+      x.JwtValidationClockSkew = TimeSpan.Zero;
 
-        x.TokenRetriever = (HttpRequest httpContext) =>
-        {
-            var fromHeader = TokenRetrieval.FromAuthorizationHeader();
-            var fromQuery = TokenRetrieval.FromQueryString();
+      x.TokenRetriever = (HttpRequest httpContext) =>
+      {
+        var fromHeader = TokenRetrieval.FromAuthorizationHeader();
+        var fromQuery = TokenRetrieval.FromQueryString();
 
-            return fromHeader(httpContext) ?? fromQuery(httpContext);
-        };
+        return fromHeader(httpContext) ?? fromQuery(httpContext);
+      };
     });
 
 
@@ -43,7 +43,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGet("/", context => context.Response.WriteAsync("Ocelot is running."));
+  endpoints.MapGet("/", context => context.Response.WriteAsync("Ocelot is running."));
 });
 
 
