@@ -20,11 +20,10 @@ builder.Services
 
       x.JwtValidationClockSkew = TimeSpan.Zero;
 
-      x.TokenRetriever = (HttpRequest httpContext) =>
+      x.TokenRetriever = httpContext =>
       {
         var fromHeader = TokenRetrieval.FromAuthorizationHeader();
         var fromQuery = TokenRetrieval.FromQueryString();
-
         return fromHeader(httpContext) ?? fromQuery(httpContext);
       };
     });
@@ -43,7 +42,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-  endpoints.MapGet("/", context => context.Response.WriteAsync("Ocelot is running."));
+  endpoints.MapGet("/", context => context.Response.WriteAsync("Hello World !"));
 });
 
 
